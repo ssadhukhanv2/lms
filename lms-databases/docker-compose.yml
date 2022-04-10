@@ -1,0 +1,36 @@
+version: "3.8"
+services:
+    mongo: 
+        image: mongo:5.0.6
+        container_name: mongo-lms
+        restart: unless-stopped
+        ports:
+            - $LMS_MONGO_HOST_PORT:27017
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=$MONGO_ROOT_USERNAME
+            - MONGO_INITDB_ROOT_PASSWORD=$MONGO_ROOT_PASSWORD
+            - MONGO_INITDB_DATABASE=$MONGO_APP_DB_NAME
+            - MONGO_DB_USERNAME=$MONGO_APP_DB_USERNAME
+            - MONGO_DB_PASSWORD=$MONGO_APP_DB_PASSWORD
+        volumes:
+            - $MONGO_DATA_HOST_PATH:/data/db
+            - $MONGO_LOG_HOST_PATH:/var/log/mongodb
+            - $MONGO_INITDB_SCRIPTS_HOST_PATH:/docker-entrypoint-initdb.d
+        command: ["--bind_ip","0.0.0.0"]
+    postgres:
+        image: postgres:14
+        container_name: postgres-lms-ui
+        restart: unless-stopped
+        ports:
+            - $LMSUI_POSTGRES_HOST_PORT:5432
+        environment:
+            - POSTGRES_USER=$POSTGRES_ROOT_USERNAME
+            - POSTGRES_PASSWORD=$POSTGRES_ROOT_PASSWORD
+            - APP_DB_USER=$POSTGRES_APP_DB_USERNAME
+            - APP_DB_PASS=$POSTGRES_APP_DB_PASSWORD
+            - APP_DB_NAME=$POSTGRES_APP_DB_NAME
+        volumes:
+            - $POSTGRES_DATA_HOST_PATH:/var/lib/postgresql/data
+            - $POSTGRES_LOG_HOST_PATH:/var/log/postgresql
+            - $POSTGRES_INITDB_SCRIPTS_HOST_PATH:/docker-entrypoint-initdb.d
+        

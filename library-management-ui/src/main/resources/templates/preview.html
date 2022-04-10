@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Preview</title>
+</head>
+<body>
+<div>
+    <ul>
+        <li sec:authorize="isAnonymous()">
+            <a th:href="@{/login}">Login</a>
+        </li>
+        <li sec:authorize="isAuthenticated()">
+            <a th:href="@{/logout}">Logout</a>
+        </li>
+        <li sec:authorize="isAuthenticated()">
+            <a th:href="@{/dashboard}">dashboard</a>
+        </li>
+    </ul>
+</div>
+<h1>Preview Book</h1>
+Logged in user: <span sec:authentication="name"/><br>
+<table>
+    <thead>
+    <th scope="col"><span th:text="${bookDetails.name}"></span></th>
+    </thead>
+    <tbody>
+    <tr>
+        <td th:text="${bookDetails.description}"></td>
+    </tr>
+    <tr>
+        <td>Published Date</td>
+        <td th:text="${bookDetails.publishedDate}"></td>
+    </tr>
+    <tr>
+        <td>Authors</td>
+        <td>
+            <div th:each="author:${bookDetails.authorList}">
+                <!--Each author will have it's separate display page-->
+                <a th:href="@{'/dashboard/'+'?author='+${author}}"> <span th:text="${author}"></span></a>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
+
