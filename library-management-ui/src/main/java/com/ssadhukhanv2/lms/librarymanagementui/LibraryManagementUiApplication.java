@@ -40,7 +40,7 @@ public class LibraryManagementUiApplication implements CommandLineRunner {
         Role roleBusiness = new Role();
         roleBusiness.setUserRole(UserRole.BUSINESS_USER);
 
-        //roleRepository.saveAll(Set.of(roleAdmin, roleBusiness));
+        roleRepository.saveAll(Set.of(roleAdmin, roleBusiness));
 
 
         User userAdmin = new User();
@@ -58,7 +58,7 @@ public class LibraryManagementUiApplication implements CommandLineRunner {
         superUser.addRole(roleAdmin);
         superUser.addRole(roleBusiness);
 
-        //userRepository.saveAll(Set.of(userAdmin, superUser));
+        userRepository.saveAll(Set.of(userAdmin, superUser));
 
     }
 }
