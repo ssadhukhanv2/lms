@@ -1,0 +1,9 @@
+
+./lms-databases/mongodb/**
+!./lms-databases/mongodb/initdb.d/
+
+./lms-databases/postgresql/**
+!./lms-databases/postgresql/initdb.d/
+
+./library-management-system/logs/**
+./library-management-ui/logs/**
