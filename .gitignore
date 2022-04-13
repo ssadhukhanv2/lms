@@ -1,9 +1,14 @@
 
+.idea/
+
+#ignore all files in mongodb but track the "initdb.d" folder
 lms-databases/mongodb
 !./lms-databases/mongodb/initdb.d/
 
+#ignore all files in mongodb but track the "initdb.d" folder
 lms-databases/postgresql/
 !./lms-databases/postgresql/initdb.d/
 
+#ignore log files for both applications
 library-management-system/logs/
-./library-management-ui/logs/
+library-management-ui/logs/
