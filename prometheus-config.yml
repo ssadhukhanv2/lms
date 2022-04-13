@@ -1,0 +1,15 @@
+#docker run --name lms_prometheus -p 9090:9090 -v C:\Users\subhr\digital-toddling\spring-cloud\my-pocs\lms\prometheus-config.yml:/etc/prometheus/prometheus-config.yml prom/prometheus --config.file=/etc/prometheus/prometheus-config.yml
+global:
+  scrape_interval: 5s
+  evaluation_interval: 5s
+
+scrape_configs:
+  - job_name: 'lms_prometheus'
+    static_configs:
+      - targets: ['127.0.9.1:9090']
+  - job_name: 'library-management-application'
+    metrics_path: '/actuator/prometheus'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['host.docker.internal:8001']
+      
