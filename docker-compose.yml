@@ -90,7 +90,7 @@ services:
     lms-app-ui-1:
         image: library-management-ui:0.0.1-SNAPSHOT
         container_name: lms-app-ui-1
-        restart: always
+        restart: on-failure:10
         mem_limit: 700m
         ports:
             - $LMS_UI_1_HOST_PORT:$LMS_UI_PORT

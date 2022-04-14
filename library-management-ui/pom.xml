@@ -188,6 +188,11 @@
                     </excludes>
                 </configuration>
             </plugin>
+
+            <!--
+            Jib Maven Documentation
+            https://github.com/GoogleContainerTools/jib/tree/master/jib-maven-plugin#adding-arbitrary-files-to-the-image
+            -->
             <plugin>
                 <groupId>com.google.cloud.tools</groupId>
                 <artifactId>jib-maven-plugin</artifactId>
@@ -219,7 +224,39 @@
                         <ports>
                             <port>8080</port>
                         </ports>
+
+                        <entrypoint>
+                            <arg>sh</arg>
+                            <arg>/extras/run_app.sh</arg>
+                            <!--<arg>java</arg>
+                            <arg>-cp</arg>
+                            <arg>@/app/jib-classpath-file</arg>
+                            <arg>@/app/jib-main-class-file</arg>-->
+                        </entrypoint>
                     </container>
+
+                    <extraDirectories>
+                        <paths>
+                            <path>
+                                <from>./extras</from>
+                                <into>/extras</into>
+                            </path>
+                        </paths>
+                        <permissions>
+                            <permission>
+                                <file>/extras/wait-for-it.sh</file>
+                                <mode>777</mode>
+                            </permission>
+                            <permission>
+                                <file>/extras/wait-for.sh</file>
+                                <mode>777</mode>
+                            </permission>
+                            <permission>
+                                <file>/extras/run-app.sh</file>
+                                <mode>777</mode>
+                            </permission>
+                        </permissions>
+                    </extraDirectories>
                 </configuration>
                 <executions>
                     <execution>
