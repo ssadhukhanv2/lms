@@ -1,0 +1,57 @@
+version: "3.8"
+services:
+    lms-db-mongo: 
+        image: mongo:5.0.6
+        container_name: lms-db-mongo
+        restart: always
+        ports:
+            - $LMS_MONGO_HOST_PORT:27017
+        networks:
+            - yo
+        environment:
+            - MONGO_INITDB_ROOT_USERNAME=$MONGO_ROOT_USERNAME
+            - MONGO_INITDB_ROOT_PASSWORD=$MONGO_ROOT_PASSWORD
+            - MONGO_INITDB_DATABASE=$MONGO_APP_DB_NAME
+            - MONGO_DB_USERNAME=$MONGO_APP_DB_USERNAME
+            - MONGO_DB_PASSWORD=$MONGO_APP_DB_PASSWORD
+        volumes:
+            - $MONGO_DATA_HOST_PATH:/data/db
+            - $MONGO_LOG_HOST_PATH:/var/log/mongodb
+            - $MONGO_INITDB_SCRIPTS_HOST_PATH:/docker-entrypoint-initdb.d
+        command: ["--bind_ip","0.0.0.0"]
+    lms-ui-db-postgres:
+        image: postgres:14
+        container_name: lms-ui-db-postgres
+        restart: always
+        ports:
+            - $LMSUI_POSTGRES_HOST_PORT:5432
+        networks:
+            - yo
+        environment:
+            - POSTGRES_USER=$POSTGRES_ROOT_USERNAME
+            - POSTGRES_PASSWORD=$POSTGRES_ROOT_PASSWORD
+            - APP_DB_USER=$POSTGRES_APP_DB_USERNAME
+            - APP_DB_PASS=$POSTGRES_APP_DB_PASSWORD
+            - APP_DB_NAME=$POSTGRES_APP_DB_NAME
+        volumes:
+            - $POSTGRES_DATA_HOST_PATH:/var/lib/postgresql/data
+            - $POSTGRES_LOG_HOST_PATH:/var/log/postgresql
+            - $POSTGRES_INITDB_SCRIPTS_HOST_PATH:/docker-entrypoint-initdb.d
+    
+    eureka-server-1:
+        image: eureka-naming-server:0.0.1-SNAPSHOT
+        container_name: eureka-server-1
+        mem_limit: 700m
+        ports:
+            - $EUREKA_NAMING_SERVER_1_HOST_PORT:$EUREKA_NAMING_SERVER_PORT
+        networks:
+            - yo
+        environment:
+            - server.port=$EUREKA_NAMING_SERVER_PORT
+            - spring.application.name=eureka-server-1
+            - eureka.instance.hostname=eureka-server-1
+            - eureka.client.register-with-eureka=false
+            - eureka.client.fetch-registry=false
+networks:
+    yo:
+
