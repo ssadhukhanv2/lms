@@ -167,6 +167,15 @@
             <version>1.8.4</version>
         </dependency>
 
+        <!--Spring Boot Aspect Dependency
+        Internally uses ApectJ
+        -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-aop</artifactId>
+            </dependency>
+
+
     </dependencies>
 
     <dependencyManagement>
@@ -252,9 +261,37 @@
                         <!--<filesModificationTime>USE_CURRENT_TIMESTAMP</filesModificationTime>-->
                         <creationTime>USE_CURRENT_TIMESTAMP</creationTime>
                         <ports>
-                            <port>8080</port>
+                            <port>8001</port>
                         </ports>
+                        <entrypoint>
+                            <arg>sh</arg>
+                            <arg>/extras/entrypoint.sh</arg>
+                        </entrypoint>
                     </container>
+
+                    <extraDirectories>
+                        <paths>
+                            <path>
+                                <from>./extras</from>
+                                <into>/extras</into>
+                            </path>
+                        </paths>
+                        <permissions>
+                            <permission>
+                                <file>/extras/wait-for-it.sh</file>
+                                <mode>777</mode>
+                            </permission>
+                            <permisson>
+                                <file>/extras/wait-for.sh</file>
+                                <mode>777</mode>
+                            </permisson>
+                            <permission>
+                                <file>/extras/run-app.sh</file>
+                                <mode>777</mode>
+                            </permission>
+                        </permissions>
+                    </extraDirectories>
+
                 </configuration>
                 <executions>
                     <execution>
