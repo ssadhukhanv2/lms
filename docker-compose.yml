@@ -58,7 +58,7 @@ services:
         image: library-management-system:0.0.1-SNAPSHOT
         container_name: lms-app-1
         mem_limit: 700m
-        restart: on-failure:10
+        restart: on-failure:1
         ports:
             - $LMS_APP_1_HOST_PORT:$LMS_APP_PORT
         networks:
@@ -90,7 +90,7 @@ services:
     lms-app-ui-1:
         image: library-management-ui:0.0.1-SNAPSHOT
         container_name: lms-app-ui-1
-        restart: on-failure:10
+        restart: on-failure:1
         mem_limit: 700m
         ports:
             - $LMS_UI_1_HOST_PORT:$LMS_UI_PORT

@@ -222,12 +222,12 @@
                         <!--<filesModificationTime>USE_CURRENT_TIMESTAMP</filesModificationTime>-->
                         <creationTime>USE_CURRENT_TIMESTAMP</creationTime>
                         <ports>
-                            <port>8080</port>
+                            <port>9001</port>
                         </ports>
 
                         <entrypoint>
                             <arg>sh</arg>
-                            <arg>/extras/run_app.sh</arg>
+                            <arg>/extras/entrypoint.sh</arg>
                             <!--<arg>java</arg>
                             <arg>-cp</arg>
                             <arg>@/app/jib-classpath-file</arg>
