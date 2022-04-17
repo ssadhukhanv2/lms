@@ -3,6 +3,7 @@ package com.ssadhukhanv2.lms.librarymanagementsystem.dao;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -35,6 +36,7 @@ public class BookDao {
     private String currency;
 
     //Description of the book
+    @ToString.Exclude
     private String description;
 
     //Publisher of the book
