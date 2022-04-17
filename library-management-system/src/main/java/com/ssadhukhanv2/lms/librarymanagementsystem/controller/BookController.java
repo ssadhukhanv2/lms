@@ -1,5 +1,6 @@
 package com.ssadhukhanv2.lms.librarymanagementsystem.controller;
 
+import com.ssadhukhanv2.lms.librarymanagementsystem.aspect.LogResponse;
 import com.ssadhukhanv2.lms.librarymanagementsystem.dao.BookDao;
 import com.ssadhukhanv2.lms.librarymanagementsystem.exception.LibraryOperationException;
 import com.ssadhukhanv2.lms.librarymanagementsystem.service.BookService;
@@ -13,7 +14,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
@@ -28,6 +28,7 @@ public class BookController {
 
     //Create
     @PostMapping(value = "")
+    @LogResponse
     public ResponseEntity<?> addBook(@RequestBody final BookDao bookDao) {
         try {
             final URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("//" + bookDao.getIsbn()).build().toUri();
@@ -41,6 +42,7 @@ public class BookController {
 
     //Read
     @GetMapping(value = "/{isbn}")
+    @LogResponse
     public ResponseEntity<?> getBookByIsbn(@PathVariable(value = "isbn") final String isbn) {
         try {
             BookDao bookDao = bookService.getBookByIsbn(isbn);
@@ -55,6 +57,7 @@ public class BookController {
 
     //Update
     @PutMapping(value = "/{isbn}")
+    @LogResponse
     public ResponseEntity<?> updateBook(@PathVariable(value = "isbn") final String isbn, @RequestBody final BookDao bookDao) {
         try {
             return ResponseEntity.ok(bookService.updateBook(isbn, bookDao));
@@ -67,6 +70,7 @@ public class BookController {
 
     //Delete
     @DeleteMapping(value = "/{isbn}")
+    @LogResponse
     public ResponseEntity<?> deleteBook(@PathVariable(value = "isbn") final String isbn) {
         try {
             bookService.removeBook(isbn);
@@ -80,6 +84,7 @@ public class BookController {
 
 
     @PostMapping(value = "/search")
+    @LogResponse
     public ResponseEntity<?> searchBooks(@RequestBody BookDao bookDao) {
         try {
             return new ResponseEntity<>(bookService.queryByExample(bookDao), HttpStatus.OK);
@@ -92,6 +97,7 @@ public class BookController {
 
 
     @PostMapping(value = "/search/authors")
+    @LogResponse
     public ResponseEntity<?> searchAuthor(@RequestBody BookDao bookDao) {
         try {
             return new ResponseEntity<>(bookService.getBookByAuthors(bookDao.getAuthorList()), HttpStatus.OK);
@@ -103,6 +109,7 @@ public class BookController {
     }
 
     @PostMapping(value = "/search/genres")
+    @LogResponse
     public ResponseEntity<?> searchGenres(@RequestBody BookDao bookDao) {
         try {
             return new ResponseEntity<>(bookService.getBookByGenres(bookDao.getGenres()), HttpStatus.OK);
@@ -121,7 +128,9 @@ public class BookController {
             @ApiResponse(responseCode = "204", description = "No books available in the library with the given search criteria", content = @Content),
             @ApiResponse(responseCode = "500", description = "Error while fetching book.")
     })
+
     @GetMapping(value = "")
+    @LogResponse
     public ResponseEntity<?> getLibraryBookCatalogue(@RequestParam(value = "pageNumber", required = false) final Integer pageNumber,
                                                      @RequestParam(value = "pageSize", required = false) final Integer pageSize) {
         try {
