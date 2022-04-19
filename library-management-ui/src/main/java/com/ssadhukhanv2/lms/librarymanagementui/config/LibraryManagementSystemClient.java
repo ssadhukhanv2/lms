@@ -1,16 +1,11 @@
-package com.ssadhukhanv2.lms.librarymanagementui.client;
+package com.ssadhukhanv2.lms.librarymanagementui.config;
 
+import com.ssadhukhanv2.lms.librarymanagementui.client.LibraryManagementSystemClientConfig;
 import com.ssadhukhanv2.lms.librarymanagementui.client.domain.BookDao;
-import com.ssadhukhanv2.lms.librarymanagementui.config.LibraryManagementSystemClientConfig;
 
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import java.net.URI;
-import java.util.List;
 
 //@FeignClient(value = "library", url = "http://localhost:8080/api/v1/book", configuration = LibraryManagementSystemClientConfig.class)
 @FeignClient(value = "library-management-system/api/v1/book", configuration = LibraryManagementSystemClientConfig.class)

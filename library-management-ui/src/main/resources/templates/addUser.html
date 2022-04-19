@@ -5,7 +5,11 @@
     <title>Add Book</title>
 </head>
 <body>
-<h1>Add Book</h1>
+<div th:replace="fragments/header :: header-menu">Header</div>
+
+<h1>Add User</h1>
+
 Logged in user: <span sec:authentication="name"/>
+
 </body>
 </html>

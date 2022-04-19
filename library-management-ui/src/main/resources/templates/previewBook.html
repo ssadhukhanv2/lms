@@ -4,18 +4,7 @@
     <title>Preview</title>
 </head>
 <body>
-<div>
-    <ul>
-        <li sec:authorize="isAnonymous()">
-            <a th:href="@{/login}">Login</a>
-        </li>
-        <li sec:authorize="isAuthenticated()">
-            <a th:href="@{/logout}">Logout</a>
-        </li>
-        <li sec:authorize="isAuthenticated()">
-            <a th:href="@{/dashboard}">dashboard</a>
-        </li>
-    </ul>
+<div th:replace="fragments/header :: header-menu">
 </div>
 <h1>Preview Book</h1>
 Logged in user: <span sec:authentication="name"/><br>

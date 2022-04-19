@@ -2,12 +2,9 @@ package com.ssadhukhanv2.lms.librarymanagementui.domain;
 
 import com.ssadhukhanv2.lms.librarymanagementui.entity.Role;
 import com.ssadhukhanv2.lms.librarymanagementui.entity.User;
-import com.ssadhukhanv2.lms.librarymanagementui.enumeration.UserRole;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 

@@ -1,4 +1,4 @@
-package com.ssadhukhanv2.lms.librarymanagementui.config;
+package com.ssadhukhanv2.lms.librarymanagementui.client;
 
 import feign.Feign;
 import feign.RequestInterceptor;

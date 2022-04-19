@@ -1,7 +1,6 @@
 package com.ssadhukhanv2.lms.librarymanagementui.controller;
 
 
-import com.ssadhukhanv2.lms.librarymanagementui.client.domain.BookDao;
 import com.ssadhukhanv2.lms.librarymanagementui.domain.BookDetails;
 import com.ssadhukhanv2.lms.librarymanagementui.service.LibraryManagementSystemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +11,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.awt.print.Book;
 import java.util.List;
 import java.util.Optional;
 
 @Controller
 @RequestMapping("")
 public class LibraryManagementUiController {
-
 
 
     @Autowired
@@ -30,30 +27,33 @@ public class LibraryManagementUiController {
         return "login";
     }
 
-    @GetMapping(value = "/add")
+    @GetMapping(value = "/addBook")
     public String getAddBookPage(Model model) {
-        return "add";
+        return "addBook";
     }
 
+    @GetMapping(value = "/addUser")
+    public String getAddUserPage(Model model) {return "addUser";}
+
     @GetMapping(value = {"", "/", "/dashboard"})
-    public String getDashboardPage(Model model, @RequestParam(value = "author",required = false)final String authorName) {
-        Optional<List<BookDetails>> bookDetailsListOptional= Optional.empty();
-        if(authorName!=null){
+    public String getDashboardPage(Model model, @RequestParam(value = "author", required = false) final String authorName) {
+        Optional<List<BookDetails>> bookDetailsListOptional = Optional.empty();
+        if (authorName != null) {
             bookDetailsListOptional = Optional.of(libraryManagementSystemService.searchBooksByAuthors(List.of(authorName)));
-        }else {
+        } else {
             bookDetailsListOptional = Optional.of(libraryManagementSystemService.getAllbook());
         }
         model.addAttribute("bookDetailsList", bookDetailsListOptional.get());
-        return "dashboard";
+        return "bookDashboard";
     }
 
     @GetMapping(value = {"/preview", "/preview/{isbn}"})
     public String getPreviewBookPage(Model model, @PathVariable(name = "isbn", required = false) String isbn) {
-        if(null!=isbn){
-            BookDetails bookDetails=libraryManagementSystemService.findBookByIsbn(isbn);
-            model.addAttribute("bookDetails",bookDetails);
+        if (null != isbn) {
+            BookDetails bookDetails = libraryManagementSystemService.findBookByIsbn(isbn);
+            model.addAttribute("bookDetails", bookDetails);
         }
-        return "preview";
+        return "previewBook";
     }
 
     @GetMapping(value = "/edit")

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Book</title>
+</head>
+<body>
+<div th:replace="fragments/header :: header-menu">header</div>
+<h1>Add Book</h1>
+Logged in user: <span sec:authentication="name"/>
+
+</body>
+</html>

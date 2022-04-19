@@ -2,7 +2,6 @@ package com.ssadhukhanv2.lms.librarymanagementui.service;
 
 import com.ssadhukhanv2.lms.librarymanagementui.domain.LibraryUserDetails;
 import com.ssadhukhanv2.lms.librarymanagementui.entity.User;
-import com.ssadhukhanv2.lms.librarymanagementui.exception.LibraryManagementException;
 import com.ssadhukhanv2.lms.librarymanagementui.repository.RoleRepository;
 import com.ssadhukhanv2.lms.librarymanagementui.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -3,22 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>dashboard</title>
-    <style>
-        table, th, td {
-            border: 1px solid black;
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{css/tab_border.css}"/>
 </head>
 <body>
-<div>
-    <ul>
-        <li sec:authorize="isAnonymous()">
-            <a th:href="@{/login}">Login</a>
-        </li>
-        <li sec:authorize="isAuthenticated()">
-            <a th:href="@{/logout}">Logout</a>
-        </li>
-    </ul>
+<div th:replace="fragments/header :: header-menu"> Header menu goes here</div>
+
 </div>
 <h1>Book Dashboard</h1>
 Logged in user: <span sec:authentication="name"/>
@@ -27,15 +16,16 @@ Logged in user: <span sec:authentication="name"/>
 </div>
 <table>
     <thead>
-        <th scope="col">Isbn</th>
-        <th scope="col">Book Name</th>
-        <th scope="col">Authors</th>
-        <th scope="col">Genres</th>
-        <th scope="col">Published Date</th>
+    <th scope="col">Isbn</th>
+    <th scope="col">Book Name</th>
+    <th scope="col">Authors</th>
+    <th scope="col">Genres</th>
+    <th scope="col">Published Date</th>
     </thead>
     <tbody>
     <tr th:each="bookDetails:${bookDetailsList}">
-        <th scope="row"><a th:href="@{'/preview/'+${bookDetails.isbn}}"><span th:text="${bookDetails.isbn}"></span></a></th>
+        <th scope="row"><a th:href="@{'/preview/'+${bookDetails.isbn}}"><span th:text="${bookDetails.isbn}"></span></a>
+        </th>
         <td th:text="${bookDetails.name}"></td>
         <td th:text="${bookDetails.authorList}"></td>
         <td th:text="${bookDetails.genres}"></td>
