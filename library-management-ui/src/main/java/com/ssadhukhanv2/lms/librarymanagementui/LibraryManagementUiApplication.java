@@ -34,31 +34,34 @@ public class LibraryManagementUiApplication implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... args) throws Exception {
-        Role roleAdmin = new Role();
-        roleAdmin.setUserRole(UserRole.ADMIN_USER);
+        System.out.println(passwordEncoder.encode("super@2021"));
+        System.out.println(passwordEncoder.encode("admin@2021"));
 
-        Role roleBusiness = new Role();
-        roleBusiness.setUserRole(UserRole.BUSINESS_USER);
-
-        roleRepository.saveAll(Set.of(roleAdmin, roleBusiness));
-
-
-        User userAdmin = new User();
-        userAdmin.setUserEmail("admin@gmail.com");
-        userAdmin.setUserName("admin");
-        userAdmin.setUserPassword(passwordEncoder.encode("admin@2021"));
-        userAdmin.setUserAccountEnabled(true);
-        userAdmin.addRole(roleAdmin);
-
-        User superUser = new User();
-        superUser.setUserEmail("super@gmail.com");
-        superUser.setUserName("superuser");
-        superUser.setUserPassword(passwordEncoder.encode("super@2021"));
-        superUser.setUserAccountEnabled(true);
-        superUser.addRole(roleAdmin);
-        superUser.addRole(roleBusiness);
-
-        userRepository.saveAll(Set.of(userAdmin, superUser));
+//        Role roleAdmin = new Role();
+//        roleAdmin.setUserRole(UserRole.ADMIN_USER);
+//
+//        Role roleBusiness = new Role();
+//        roleBusiness.setUserRole(UserRole.BUSINESS_USER);
+//
+//        roleRepository.saveAll(Set.of(roleAdmin, roleBusiness));
+//
+//
+//        User userAdmin = new User();
+//        userAdmin.setUserEmail("admin@gmail.com");
+//        userAdmin.setUserName("admin");
+//        userAdmin.setUserPassword(passwordEncoder.encode("admin@2021"));
+//        userAdmin.setUserAccountEnabled(true);
+//        userAdmin.addRole(roleAdmin);
+//
+//        User superUser = new User();
+//        superUser.setUserEmail("super@gmail.com");
+//        superUser.setUserName("superuser");
+//        superUser.setUserPassword(passwordEncoder.encode("super@2021"));
+//        superUser.setUserAccountEnabled(true);
+//        superUser.addRole(roleAdmin);
+//        superUser.addRole(roleBusiness);
+//
+//        userRepository.saveAll(Set.of(userAdmin, superUser));
 
     }
 }
