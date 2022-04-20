@@ -1,21 +1,27 @@
-package com.ssadhukhanv2.lms.librarymanagementsystem.service;
+package com.ssadhukhanv2.lms.librarymanagementsystem.listener;
 
+import com.ssadhukhanv2.lms.librarymanagementsystem.event.ApiEvent;
 import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.MeterRegistry;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.event.EventListener;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-@Service
-public class HitCountService {
+@Component
+@Slf4j
+public class ApiEventListener {
     private Map<String, Map<Integer, Integer>> hitMap;
 
     Counter hitCounter;
 
-    public HitCountService(MeterRegistry meterRegistry) {
+    public ApiEventListener(MeterRegistry meterRegistry) {
         hitMap = new ConcurrentHashMap<>();
 
         //Adds a Counter metric "hit_counter_total" in Prometheus
@@ -27,8 +33,14 @@ public class HitCountService {
                 .register(meterRegistry);
     }
 
-    public void updateHits(String request, Integer responseCode) {
-        Map<Integer, Integer> statusMap = hitMap.get(request);
+    // Use Spring events to decouple this
+    // https://medium.com/@semotpan/spring-application-events-7ab5390db6dd
+    @Async
+    @EventListener
+    public void handleApiEvent(ApiEvent apiEvent) {
+        String requestString = apiEvent.getMethod() + " " + apiEvent.getUri();
+        int responseCode = apiEvent.getResponseStatus();
+        Map<Integer, Integer> statusMap = hitMap.get(requestString);
         if (statusMap == null) {
             statusMap = new ConcurrentHashMap<>();
         }
@@ -42,7 +54,15 @@ public class HitCountService {
         hitCounter.increment();
 
         statusMap.put(responseCode, count);
-        hitMap.put(request, statusMap);
+        hitMap.put(requestString, statusMap);
+
+        log.info("From Listener handleApiEvent:"+apiEvent.toString());
+    }
+
+    @Async
+    @EventListener
+    public void logApiEventToConsole(ApiEvent apiEvent) {
+        log.info("From Listener logApiEventToConsole: "+apiEvent.toString());
     }
 
     public Map<String, Map<Integer, Integer>> getHitMap() {

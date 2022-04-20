@@ -1,12 +1,10 @@
 package com.ssadhukhanv2.lms.librarymanagementsystem.monitor;
 
-import com.ssadhukhanv2.lms.librarymanagementsystem.service.HitCountService;
+import com.ssadhukhanv2.lms.librarymanagementsystem.listener.ApiEventListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.HealthIndicator;
 import org.springframework.stereotype.Component;
-
-import java.util.Random;
 
 @Component("hit_summary")
 public class HitSummaryMetricIndicator implements HealthIndicator {
@@ -18,7 +16,7 @@ public class HitSummaryMetricIndicator implements HealthIndicator {
      */
 
     @Autowired
-    HitCountService hitCountService;
+    ApiEventListener apiEventListener;
     /*
      * Custom Health Indicator named "hit_summary" for actuator/health
      *
@@ -38,7 +36,7 @@ public class HitSummaryMetricIndicator implements HealthIndicator {
 
     @Override
     public Health health() {
-        return Health.up().withDetails(hitCountService.getHitMap()).build();
+        return Health.up().withDetails(apiEventListener.getHitMap()).build();
     }
 
 
