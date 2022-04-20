@@ -4,6 +4,7 @@ package com.ssadhukhanv2.lms.librarymanagementui.controller;
 import com.ssadhukhanv2.lms.librarymanagementui.domain.BookDetails;
 import com.ssadhukhanv2.lms.librarymanagementui.service.LibraryManagementSystemService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,12 +29,19 @@ public class LibraryManagementUiController {
     }
 
     @GetMapping(value = "/addBook")
+    @PreAuthorize("hasRole('ROLE_BUSINESS_USER')")
     public String getAddBookPage(Model model) {
         return "addBook";
     }
 
     @GetMapping(value = "/addUser")
+    @PreAuthorize("hasRole('ROLE_ADMIN_USER')")
     public String getAddUserPage(Model model) {return "addUser";}
+
+    @GetMapping(value = "/access-denied")
+    public String getAccessDeniedPage(){
+        return "redirect:/?accessDenied";
+    }
 
     @GetMapping(value = {"", "/", "/dashboard"})
     public String getDashboardPage(Model model, @RequestParam(value = "author", required = false) final String authorName) {

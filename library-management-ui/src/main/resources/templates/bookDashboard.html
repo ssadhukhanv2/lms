@@ -13,6 +13,7 @@
 Logged in user: <span sec:authentication="name"/>
 <div>
     Welcome <span sec:authentication="name"/>
+    <div th:if="${param.accessDenied}">You currently don't have access to the selected resource. Please contact System Administrator.</div>
 </div>
 <table>
     <thead>
