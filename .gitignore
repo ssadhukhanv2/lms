@@ -12,3 +12,5 @@ lms-databases/postgresql/
 #ignore log files for both applications
 library-management-system/logs/
 library-management-ui/logs/
+
+api-gateway

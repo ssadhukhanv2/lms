@@ -12,6 +12,10 @@ import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
+
+/*
+* Entity Object for Book
+* */
 @Data
 @Document(collection = "book")
 public class Book {

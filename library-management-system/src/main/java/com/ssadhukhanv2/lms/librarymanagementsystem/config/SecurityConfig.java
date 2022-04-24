@@ -13,9 +13,23 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 
-//https://github.com/spring-projects/spring-security/issues/7526
-//https://www.baeldung.com/java-config-spring-security
-//https://www.baeldung.com/properties-with-spring
+/**
+ * Basic Security Configuration for the Library Management System.<br/>
+ *
+ * App Credentials may be externalized using:<
+ * <ul>
+ *     <li>lms.user:lmsuser1</li>
+ *     <li>lms.user.password:l1m2s3p4a%s^s&w&o*r(d</li>
+ *     <li>lms.user.role:LMS_USER</li>
+ * </ul>
+ *
+ * @see <a href="https://github.com/spring-projects/spring-security/issues/7526">using the configure(AuthenticationManagerBuilder auth) instead of configureGlobal method </a>
+ * @see <a href="https://www.baeldung.com/java-config-spring-security">baeldung spring security</a>
+ * @see <a href="https://www.baeldung.com/properties-with-spring"> baeldung using properties in spring</a>
+ *
+ * @author Subhrajit Sadhukhan
+ */
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -29,7 +43,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String[] openApiUrls = {"/v3/**", "/api-docs.yaml", "/swagger-ui/**"};
 
 
-    //https://stackoverflow.com/questions/56388865/spring-security-configuration-httpsecurity-vs-websecurity
+    /**
+     * {@link WebSecurity}
+     *
+     * General use of WebSecurity ignoring() method omits Spring Security and none of Spring Security’s features will be available. WebSecurity is based above HttpSecurity.
+     * @param web
+     * @throws Exception
+     *
+     * @see <a href="https://stackoverflow.com/questions/56388865/spring-security-configuration-httpsecurity-vs-websecurity">when to use websecurity instead of httpsecurity in spring</a>
+     */
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()

@@ -10,6 +10,12 @@ import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Domain object for Book
+ *
+ * @author Subhrajit Sadhukhan
+ */
+
 @Data
 @NoArgsConstructor
 public class BookDao {

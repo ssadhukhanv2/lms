@@ -33,6 +33,10 @@ public class LibraryManagementUiApplication implements CommandLineRunner {
 
     @Override
     @Transactional
+    //auto id generation from database using postgres
+    //call a stored procedure postgres
+    //https://stackoverflow.com/questions/19582219/hibernate-and-oracle-sequence
+    //https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-sequences/
     public void run(String... args) throws Exception {
         System.out.println(passwordEncoder.encode("super@2021"));
         System.out.println(passwordEncoder.encode("admin@2021"));
