@@ -21,15 +21,18 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 @SpringBootApplication
 @EnableEurekaClient
-public class LibraryManagementSystemApplication implements CommandLineRunner {
+public class LibraryManagementSystemApplication {
 
     @Autowired
     BookService bookService;
 
+    @Autowired
+    BookDaoFactory bookDaoFactory;
 
     public static void main(String[] args) {
 
@@ -55,6 +58,21 @@ public class LibraryManagementSystemApplication implements CommandLineRunner {
 
     }
 
+    @PostConstruct
+    public void createInitialSetOfBook() throws Exception {
+        this.bookDaoFactory.createDefaultBookDaoList().forEach((bookDao) -> {
+            try {
+                bookService.createBook(bookDao);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+        //create using factory method
+        bookService.createBook(this.bookDaoFactory.createBookDao("BookDao"));
+
+    }
+
     //https://stackoverflow.com/questions/59115578/httptrace-endpoint-of-spring-boot-actuator-doesnt-exist-anymore-with-spring-b
     // actuator/httptrace no longer available by default with Spring Boot 2.2.0
 
@@ -67,14 +85,5 @@ public class LibraryManagementSystemApplication implements CommandLineRunner {
         return new InMemoryHttpTraceRepository();
     }
 
-    @Override
-    public void run(String... args) throws Exception {
-        BookDaoFactory.createDefaultBookDaoList().forEach((bookDao) -> {
-            try {
-                bookService.createBook(bookDao);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-    }
+
 }
