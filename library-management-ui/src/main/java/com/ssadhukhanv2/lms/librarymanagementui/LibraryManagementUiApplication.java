@@ -9,9 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.Set;
 
@@ -25,11 +29,19 @@ public class LibraryManagementUiApplication implements CommandLineRunner {
     @Autowired
     UserRepository userRepository;
 
-    @Autowired
-    PasswordEncoder passwordEncoder;
+    //    @Autowired
+//    PasswordEncoder passwordEncoder;
     public static void main(String[] args) {
         SpringApplication.run(LibraryManagementUiApplication.class, args);
     }
+
+
+    @Bean
+    @LoadBalanced
+    public RestTemplate restTemplate() {
+        return new RestTemplate();
+    }
+
 
     @Override
     @Transactional
@@ -38,8 +50,8 @@ public class LibraryManagementUiApplication implements CommandLineRunner {
     //https://stackoverflow.com/questions/19582219/hibernate-and-oracle-sequence
     //https://www.postgresqltutorial.com/postgresql-tutorial/postgresql-sequences/
     public void run(String... args) throws Exception {
-        System.out.println(passwordEncoder.encode("super@2021"));
-        System.out.println(passwordEncoder.encode("admin@2021"));
+//        System.out.println(passwordEncoder.encode("super@2021"));
+//        System.out.println(passwordEncoder.encode("admin@2021"));
 
 //        Role roleAdmin = new Role();
 //        roleAdmin.setUserRole(UserRole.ADMIN_USER);

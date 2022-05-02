@@ -1,4 +1,4 @@
-package com.ssadhukhanv2.lms.librarymanagementui.config;
+package com.ssadhukhanv2.lms.librarymanagementui.client;
 
 import com.ssadhukhanv2.lms.librarymanagementui.client.LibraryManagementSystemClientConfig;
 import com.ssadhukhanv2.lms.librarymanagementui.client.domain.BookDao;

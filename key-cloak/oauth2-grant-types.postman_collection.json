@@ -1,0 +1,528 @@
+{
+	"info": {
+		"_postman_id": "a77035a6-df1f-4701-8d3b-dd1825db78a2",
+		"name": "oauth2-grant-types",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "authorization-code",
+			"item": [
+				{
+					"name": "auth-endpoint",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/realms/lms/protocol/openid-connect/auth?response_type=code&client_id=lms-ui&state=hyyabsjhuyuc1&scope=openid profile&redirect_uri=http://localhost:9001/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"realms",
+								"lms",
+								"protocol",
+								"openid-connect",
+								"auth"
+							],
+							"query": [
+								{
+									"key": "response_type",
+									"value": "code"
+								},
+								{
+									"key": "client_id",
+									"value": "lms-ui"
+								},
+								{
+									"key": "state",
+									"value": "hyyabsjhuyuc1"
+								},
+								{
+									"key": "scope",
+									"value": "openid profile"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "http://localhost:9001/"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "token-endpoint",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "authorization_code",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "lms-ui",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "VLF0hiiCf0R12j4JeQbMDJ32xg7dqiFk",
+									"type": "text"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "http://localhost:9001/",
+									"type": "text"
+								},
+								{
+									"key": "code",
+									"value": "8de7dbe3-a2da-4a71-b78d-8975e0549129.79758ad9-b5d4-4915-9c74-f88ba188e70d.d50d9e62-0b4c-43cf-94b9-74efc5e296b8",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/realms/lms/protocol/openid-connect/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"realms",
+								"lms",
+								"protocol",
+								"openid-connect",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "pkce-enhanced-authorization-code",
+			"item": [
+				{
+					"name": "auth-endpoint",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/realms/lms/protocol/openid-connect/auth?response_type=code&client_id=lms-ui&state=hyyabsjhuyuc1&scope=openid&redirect_uri=http://localhost:9001/&code_challenge_method=S256&code_challenge=hOlWO1STC74o6qHyDRi31bWVex8KvIHLRG65qU8FjPc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"realms",
+								"lms",
+								"protocol",
+								"openid-connect",
+								"auth"
+							],
+							"query": [
+								{
+									"key": "response_type",
+									"value": "code"
+								},
+								{
+									"key": "client_id",
+									"value": "lms-ui"
+								},
+								{
+									"key": "state",
+									"value": "hyyabsjhuyuc1"
+								},
+								{
+									"key": "scope",
+									"value": "openid"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "http://localhost:9001/"
+								},
+								{
+									"key": "code_challenge_method",
+									"value": "S256"
+								},
+								{
+									"key": "code_challenge",
+									"value": "hOlWO1STC74o6qHyDRi31bWVex8KvIHLRG65qU8FjPc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "token-endpoint",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "authorization_code",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "lms-ui",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "TIJbtU65PiJQllIdpJGOJLzETHZakFIk",
+									"type": "text"
+								},
+								{
+									"key": "redirect_uri",
+									"value": "http://localhost:9001/",
+									"type": "text"
+								},
+								{
+									"key": "code",
+									"value": "71652020-6c85-46f5-b711-940e4aaca021.ce6cf07c-1673-45c4-bec1-2d6da7b4a687.d50d9e62-0b4c-43cf-94b9-74efc5e296b8",
+									"type": "text"
+								},
+								{
+									"key": "code_verifier",
+									"value": "5kcyrIEPbbvva4CgFufxWe3CmzOuSezNnxlX3avjB7s",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/realms/lms/protocol/openid-connect/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"realms",
+								"lms",
+								"protocol",
+								"openid-connect",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "client-credentials",
+			"item": [
+				{
+					"name": "token-endpoint",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "lms-app",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "KWAWwT8x8036ZBOwwpSWKNjzgAVyt9UM",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "email openid",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/realms/lms/protocol/openid-connect/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"realms",
+								"lms",
+								"protocol",
+								"openid-connect",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "password-grant-type",
+			"item": [
+				{
+					"name": "token-endpoint",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "lms-ui",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "VLF0hiiCf0R12j4JeQbMDJ32xg7dqiFk",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "admin_user",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "admin@2021",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "profile",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/realms/lms/protocol/openid-connect/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"realms",
+								"lms",
+								"protocol",
+								"openid-connect",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "refresh-token",
+			"item": [
+				{
+					"name": "obtain-regular-refresh-token",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "lms-ui",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "VLF0hiiCf0R12j4JeQbMDJ32xg7dqiFk",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "admin_user",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "admin@2021",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "profile",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/realms/lms/protocol/openid-connect/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"realms",
+								"lms",
+								"protocol",
+								"openid-connect",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "obtain-refresh-token-that-never-expire",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "lms-ui",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "VLF0hiiCf0R12j4JeQbMDJ32xg7dqiFk",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "admin_user",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "admin@2021",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "profile offline_access",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/realms/lms/protocol/openid-connect/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"realms",
+								"lms",
+								"protocol",
+								"openid-connect",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "refresh-an-access-token",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "refresh_token",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "lms-ui",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "VLF0hiiCf0R12j4JeQbMDJ32xg7dqiFk",
+									"type": "text"
+								},
+								{
+									"key": "refresh_token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI1NzFmNTQwNC1kMzA0LTQ1MTItYWI5Zi05NzVmOTA1ZDliYmMifQ.eyJleHAiOjE2NTEwODE5MDksImlhdCI6MTY1MTA4MDEwOSwianRpIjoiNTBkNTc0YWYtNGY5OC00NmMwLTk4OTgtYzRlOGFiYzNjNmM0IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9sbXMiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjgwODAvcmVhbG1zL2xtcyIsInN1YiI6ImUxZTU2YjAyLWRiNGQtNDkyMi1iNjRkLTZiN2RkNzg4N2E3MiIsInR5cCI6IlJlZnJlc2giLCJhenAiOiJsbXMtdWkiLCJzZXNzaW9uX3N0YXRlIjoiNTQ3Y2UyYjctMjliZi00ZDRiLWJmNmUtNDhkMzA0ZDBiNmE3Iiwic2NvcGUiOiJlbWFpbCBwcm9maWxlIiwic2lkIjoiNTQ3Y2UyYjctMjliZi00ZDRiLWJmNmUtNDhkMzA0ZDBiNmE3In0.ORMcJgHiVc0G6XJH2fDrpRDZoj5L9trP_9UsAQIF01k",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8080/realms/lms/protocol/openid-connect/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"realms",
+								"lms",
+								"protocol",
+								"openid-connect",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

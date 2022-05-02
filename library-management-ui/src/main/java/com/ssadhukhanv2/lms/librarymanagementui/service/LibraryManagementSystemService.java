@@ -2,7 +2,7 @@ package com.ssadhukhanv2.lms.librarymanagementui.service;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ssadhukhanv2.lms.librarymanagementui.config.LibraryManagementSystemClient;
+import com.ssadhukhanv2.lms.librarymanagementui.client.LibraryManagementSystemClient;
 import com.ssadhukhanv2.lms.librarymanagementui.client.domain.BookDao;
 
 import com.ssadhukhanv2.lms.librarymanagementui.domain.BookDetails;

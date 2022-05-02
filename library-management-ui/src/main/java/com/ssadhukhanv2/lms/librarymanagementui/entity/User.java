@@ -28,7 +28,7 @@ public class User {
     private boolean userAccountEnabled;
 
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-    @JoinTable(name = "USER_ROLE_MAPPING",
+    @JoinTable(name = "LMS_USER_ROLE_MAPPING",
             joinColumns = {@JoinColumn(name = "FK_USER_ID",table = "LMS_UI_USER")},
             inverseJoinColumns = {@JoinColumn(name = "FK_ROLE_ID", table = "LMS_UI_ROLE")})
     private Set<Role> roleSet = new HashSet<Role>();

@@ -11,7 +11,7 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_PASSWORD" --dbname "$POSTGRES_DB" 
     
     DROP TABLE IF EXISTS lms_ui_role;
     DROP TABLE IF EXISTS lms_ui_user;
-    DROP TABLE IF EXISTS user_role_mapping;
+    DROP TABLE IF EXISTS lms_user_role_mapping;
     
     create table lms_ui_role
     (
@@ -45,7 +45,7 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_PASSWORD" --dbname "$POSTGRES_DB" 
         owner to $APP_DB_USER;
 
     -- auto-generated definition
-    create table user_role_mapping
+    create table lms_user_role_mapping
     (
         fk_user_id bigint not null
             constraint fkpfbqbrp04p9bxyv31l7m8j70y
@@ -56,16 +56,16 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_PASSWORD" --dbname "$POSTGRES_DB" 
         primary key (fk_user_id, fk_role_id)
     );
 
-    alter table user_role_mapping
+    alter table lms_user_role_mapping
         owner to $APP_DB_USER;
 
     INSERT INTO lms_ui_role (role_id, role_code) VALUES (5, 'BUSINESS_USER');
     INSERT INTO lms_ui_role (role_id, role_code) VALUES (6, 'ADMIN_USER');
     INSERT INTO lms_ui_user (id, account_enabled, account_expired, account_locked, account_credentials_expired, email, user_name, password) VALUES (7, true, false, false, false, 'super@gmail.com', 'superuser', '\$2a\$11\$sHhIa4abGDgjEQ3QXRleM.WvnarL88Z0vWUWm/BqVFjq1AYv.hlSy');
     INSERT INTO lms_ui_user (id, account_enabled, account_expired, account_locked, account_credentials_expired, email, user_name, password) VALUES (8, true, false, false, false, 'admin@gmail.com', 'admin', '\$2a\$11\$cT076htJQ7pBgL5J.aUls.VXPTGiRn.r/HpIFEyf7J.P2Vu18g5f6');
-    INSERT INTO user_role_mapping (fk_user_id, fk_role_id) VALUES (7, 6);
-    INSERT INTO user_role_mapping (fk_user_id, fk_role_id) VALUES (7, 5);
-    INSERT INTO user_role_mapping (fk_user_id, fk_role_id) VALUES (8, 6);
+    INSERT INTO lms_user_role_mapping (fk_user_id, fk_role_id) VALUES (7, 6);
+    INSERT INTO lms_user_role_mapping (fk_user_id, fk_role_id) VALUES (7, 5);
+    INSERT INTO lms_user_role_mapping (fk_user_id, fk_role_id) VALUES (8, 6);
 
     commit;
 

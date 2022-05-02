@@ -19,9 +19,9 @@ services:
             - $MONGO_LOG_HOST_PATH:/var/log/mongodb
             - $MONGO_INITDB_SCRIPTS_HOST_PATH:/docker-entrypoint-initdb.d
         command: ["--bind_ip","0.0.0.0"]
-    lms-ui-db-postgres:
+    auth-db-postgres:
         image: postgres:14
-        container_name: lms-ui-db-postgres
+        container_name: auth-db-postgres
         restart: always
         ports:
             - $LMSUI_POSTGRES_HOST_PORT:5432
@@ -30,14 +30,30 @@ services:
         environment:
             - POSTGRES_USER=$POSTGRES_ROOT_USERNAME
             - POSTGRES_PASSWORD=$POSTGRES_ROOT_PASSWORD
-            - APP_DB_USER=$POSTGRES_APP_DB_USERNAME
-            - APP_DB_PASS=$POSTGRES_APP_DB_PASSWORD
-            - APP_DB_NAME=$POSTGRES_APP_DB_NAME
+            - APP_DB_USER=$POSTGRES_AUTH_DB_USERNAME
+            - APP_DB_PASS=$POSTGRES_AUTH_DB_PASSWORD
+            - APP_DB_NAME=$POSTGRES_AUTH_DB_NAME
         volumes:
             - $POSTGRES_DATA_HOST_PATH:/var/lib/postgresql/data
             - $POSTGRES_LOG_HOST_PATH:/var/log/postgresql
             - $POSTGRES_INITDB_SCRIPTS_HOST_PATH:/docker-entrypoint-initdb.d
-    
+#    key-cloak:
+#        image: lms-keycloak:latest
+#        container_name: key-cloak
+#        restart: always
+#        ports:
+#            - $LMS_KEYCLOAK_PORT:8443
+#        networks:
+#            - yo
+#        environment:
+#            - KC_DB_URL=jdbc:postgresql://auth-db-postgres:5432/$POSTGRES_AUTH_DB_NAME
+#            - KC_DB_USERNAME=$POSTGRES_AUTH_DB_USERNAME
+#            - KC_DB_PASSWORD=$POSTGRES_AUTH_DB_PASSWORD
+#            - KC_HOSTNAME=$LMS_KEYCLOAK_HOSTNAME
+#            - KEYCLOAK_ADMIN=$LMS_KEYCLOAK_ADMIN
+#            - KEYCLOAK_ADMIN_PASSWORD=$LMS_KEYCLOAK_PASSWORD
+        
+        
     eureka-server-1:
         image: eureka-naming-server:0.0.1-SNAPSHOT
         container_name: eureka-server-1
